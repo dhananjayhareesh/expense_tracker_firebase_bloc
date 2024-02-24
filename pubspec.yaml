@@ -46,6 +46,7 @@ dependencies:
   equatable: ^2.0.5
   expense_repository:
     path: packages/expense_repository
+  uuid: ^4.3.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

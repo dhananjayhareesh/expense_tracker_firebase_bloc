@@ -1,10 +1,13 @@
 import 'dart:math';
 
+import 'package:expense_repository/expense_repository.dart';
+import 'package:expense_tracker/screens/add_expense/blocs/create_categorybloc/create_category_bloc.dart';
 import 'package:expense_tracker/screens/add_expense/views/add_expense.dart';
 import 'package:expense_tracker/screens/home/views/main_screen.dart';
 import 'package:expense_tracker/screens/stats/stats.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -58,7 +61,11 @@ class _HomeScreenState extends State<HomeScreen> {
             Navigator.push(
               context,
               MaterialPageRoute<void>(
-                builder: (BuildContext context) => const AddExpense(),
+                builder: (BuildContext context) => BlocProvider(
+                  create: (context) =>
+                      CreateCategoryBloc(FirebaseExpenseRepo()),
+                  child: const AddExpense(),
+                ),
               ),
             );
           },
@@ -79,6 +86,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               child: const Icon(CupertinoIcons.add)),
         ),
-        body: index == 0 ? MainScreen() : StatScreen());
+        body: index == 0 ? const MainScreen() : const StatScreen());
   }
 }
